@@ -1,0 +1,67 @@
+$_grid-fluent: true;
+$_grid-num-cols: 0;
+$_grid-col-width: 0;
+$_grid-gutter-width: 0;
+$_grid-fluent-gutter: 0;
+$_grid-index: 0;
+$_grid-limit: 0;
+
+@mixin grid-fixed($cols, $col-px, $gutter-px) {
+  $_grid-fluent: false !global;
+
+  $_grid-num-cols: $cols !global;
+  $_grid-col-width: $col-px !global;
+  $_grid-gutter-width: $gutter-px !global;
+
+  @content
+}
+
+@mixin grid-fluent($cols, $gutter-pct) {
+  $_grid-fluent: true !global;
+
+  $_grid-num-cols: $cols !global;
+  $_grid-fluent-gutter: $gutter-pct !global;
+
+  @content
+}
+
+@function grid-width($span: $_grid-num-cols) {
+  @if $span > 1 {
+    @return ($_grid-col-width * $span) + ($_grid-gutter-width * ($span - 1));
+  } @else {
+    @return $_grid-col-width;
+  }
+}
+
+// Mix-in to start a row (optionally with a specified total number of columns)
+
+@mixin grid-row($span: $_grid-num-cols) {
+  $_grid-index: 0 !global;
+  $_grid-limit: $span !global;
+
+  @if $_grid-fluent {
+    $_grid-gutter-width: $_grid-fluent-gutter * ($_grid-num-cols / $span) !global;
+    $_grid-col-width: (100% - ($_grid-gutter-width * ($span - 1))) / $span !global;
+  }
+
+  display: block;
+  width: grid-width($span);
+}
+
+// Mix-in to add a column (optionally spanning a given number of columns)
+
+@mixin grid-col($span: 1) {
+  display: inline;
+  float: left;
+  width: grid-width($span);
+
+  @if $_grid-index > 0 {
+    margin-left: $_grid-gutter-width;
+  }
+
+  $_grid-index: $_grid-index + $span !global;
+
+  @if $_grid-index > $_grid-limit {
+    @warn "grid overflow: you have #{$_grid-index} total columns in the current row of #{$_grid-limit} columns";
+  }
+}

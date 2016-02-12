@@ -1,0 +1,39 @@
+@import "../scss/grid";
+
+body { margin:0; }
+
+#layout { background: #e5dee5; line-height:50px; }
+#left { background: #acd9ff; }
+#content { background: #5178ff; }
+#right { background: #54eeff; }
+
+#content-columns { background: #7cff8f; }
+#content-left { background: #fff862; }
+#content-right { background: #ff8e45; }
+
+@mixin grid-system {
+  #layout { @include grid-row(); }
+  #left { @include grid-col(2); }
+  #content { @include grid-col(8); }
+  #right { @include grid-col(2); }
+
+  #content-columns { @include grid-row(8); }
+  #content-left { @include grid-col(4); }
+  #content-right { @include grid-col(4); }
+}
+
+$small-width: 600px;
+$large-width: 980px;
+
+@media screen and (min-width: $small-width) and (max-width: $large-width - 1) {
+  @include grid-fluent(12, 2%) {
+    @include grid-system();
+  }
+}
+
+@media screen and (min-width: $large-width) {
+  @include grid-fixed(12, 60px, 20px) {
+    @include grid-system();
+  }
+  #layout { margin: 0 auto; }
+}

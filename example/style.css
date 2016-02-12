@@ -1,0 +1,88 @@
+body {
+  margin: 0; }
+
+#layout {
+  background: #e5dee5;
+  line-height: 50px; }
+
+#left {
+  background: #acd9ff; }
+
+#content {
+  background: #5178ff; }
+
+#right {
+  background: #54eeff; }
+
+#content-columns {
+  background: #7cff8f; }
+
+#content-left {
+  background: #fff862; }
+
+#content-right {
+  background: #ff8e45; }
+
+@media screen and (min-width: 600px) and (max-width: 979px) {
+  #layout {
+    display: block;
+    width: 100%; }
+  #left {
+    display: inline;
+    float: left;
+    width: 15%; }
+  #content {
+    display: inline;
+    float: left;
+    width: 66%;
+    margin-left: 2%; }
+  #right {
+    display: inline;
+    float: left;
+    width: 15%;
+    margin-left: 2%; }
+  #content-columns {
+    display: block;
+    width: 100%; }
+  #content-left {
+    display: inline;
+    float: left;
+    width: 48.5%; }
+  #content-right {
+    display: inline;
+    float: left;
+    width: 48.5%;
+    margin-left: 3%; } }
+
+@media screen and (min-width: 980px) {
+  #layout {
+    display: block;
+    width: 940px; }
+  #left {
+    display: inline;
+    float: left;
+    width: 140px; }
+  #content {
+    display: inline;
+    float: left;
+    width: 620px;
+    margin-left: 20px; }
+  #right {
+    display: inline;
+    float: left;
+    width: 140px;
+    margin-left: 20px; }
+  #content-columns {
+    display: block;
+    width: 620px; }
+  #content-left {
+    display: inline;
+    float: left;
+    width: 300px; }
+  #content-right {
+    display: inline;
+    float: left;
+    width: 300px;
+    margin-left: 20px; }
+  #layout {
+    margin: 0 auto; } }
